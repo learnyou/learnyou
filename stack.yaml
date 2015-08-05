@@ -4,5 +4,6 @@ flags:
     dev: false
 packages:
 - '.'
-extra-deps: []
+extra-deps:
+- "yesod-bin-1.4.13.1"
 resolver: lts-2.17
