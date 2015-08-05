@@ -12,29 +12,24 @@ module Application
     , db
     ) where
 
-import Control.Monad.Logger                 (liftLoc, runLoggingT)
-import Database.Persist.Postgresql          (createPostgresqlPool, pgConnStr,
-                                             pgPoolSize, runSqlPool)
+import Control.Monad.Logger (liftLoc, runLoggingT)
+import Database.Persist.Postgresql
+       (createPostgresqlPool, pgConnStr, pgPoolSize, runSqlPool)
 import Import
-import Language.Haskell.TH.Syntax           (qLocation)
-import Network.Wai.Handler.Warp             (Settings, defaultSettings,
-                                             defaultShouldDisplayException,
-                                             runSettings, setHost,
-                                             setOnException, setPort, getPort)
-import Network.Wai.Middleware.RequestLogger (Destination (Logger),
-                                             IPAddrSource (..),
-                                             OutputFormat (..), destination,
-                                             mkRequestLogger, outputFormat)
-import System.Log.FastLogger                (defaultBufSize, newStdoutLoggerSet,
-                                             toLogStr)
+import Language.Haskell.TH.Syntax (qLocation)
+import Network.Wai.Handler.Warp
+       (Settings, defaultSettings, defaultShouldDisplayException,
+        runSettings, setHost, setOnException, setPort, getPort)
+import Network.Wai.Middleware.RequestLogger
+       (Destination(Logger), IPAddrSource(..), OutputFormat(..),
+        destination, mkRequestLogger, outputFormat)
+import System.Log.FastLogger
+       (defaultBufSize, newStdoutLoggerSet, toLogStr)
 
 -- Import all relevant handler modules here.
 -- Don't forget to add new modules to your cabal file!
 import Handler.Common
-import Handler.JSPolicy
-import Handler.Links
-import Handler.Root
-import Handler.About
+import Handler.Pages
 
 -- This line actually creates our YesodDispatch instance. It is the second half
 -- of the call to mkYesodData which occurs in Foundation.hs. Please see the
