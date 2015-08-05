@@ -2,6 +2,17 @@ name:              learnyou
 version:           0.0.0
 cabal-version:     >= 1.8
 build-type:        Simple
+author:            Peter Harpending
+maintainer:        peter@harpending.org
+license:           AGPL-3
+license-file:      LICENSE
+synopsis:          The source for <https://learnyou.org>
+description:
+  <https://learnyou.org> is the site for /Learn You Some Algebras for Glorious
+  Good!/ (LYSA). LYSA is a fun, easy-to-read math textbook inspired by
+  <http://learnyouahaskell.com/ Learn You a Haskell for Great
+  Good!>.
+
 
 Flag dev
     Description:   Turn on development settings, like auto-reload templates.
@@ -128,3 +139,7 @@ test-suite test
                  , hspec >= 2.0.0
                  , classy-prelude
                  , classy-prelude-yesod
+
+source-repository head
+  type: git
+  location: https://github.com/learnyou/learnyou.git
