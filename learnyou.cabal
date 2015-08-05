@@ -24,15 +24,19 @@ Flag library-only
 
 library
     hs-source-dirs: ., app
-    exposed-modules: Application
-                     Foundation
-                     Import
-                     Import.NoFoundation
-                     Model
-                     Settings
-                     Settings.StaticFiles
-                     Handler.Common
-                     Handler.Home
+    exposed-modules: 
+      Application
+      Foundation                         
+      Handler.Common                     
+      Handler.JSPolicy                   
+      Handler.Links                      
+      Handler.Root                       
+      Handler.About
+      Import                             
+      Import.NoFoundation                
+      Model                              
+      Settings                           
+      Settings.StaticFiles               
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT

@@ -63,6 +63,16 @@ instance Yesod App where
         -- default-layout-wrapper is the entire page. Since the final
         -- value passed to hamletToRepHtml cannot be a widget, this allows
         -- you to use normal widget features in default-layout.
+        let links = $(hamletFile "templates/links.hamlet")
+            dropdownHtml = [hamlet|
+                <li .dropdown>
+                  <a href="#" .dropdown-toggle data-toggle=dropdown role=button
+                      aria-expanded=false>
+                    Other links
+                    <span .caret>
+                  <ul .dropdown-menu role=menu>
+                    ^{links}
+                |]
 
         pc <- widgetToPageContent $ do
             addStylesheet $ StaticR css_bootstrap_css
@@ -120,9 +130,9 @@ instance YesodAuth App where
     type AuthId App = UserId
 
     -- Where to send a user after successful login
-    loginDest _ = HomeR
+    loginDest _ = RootR
     -- Where to send a user after logout
-    logoutDest _ = HomeR
+    logoutDest _ = RootR
     -- Override the above two destinations when a Referer: header is present
     redirectToReferer _ = True
 

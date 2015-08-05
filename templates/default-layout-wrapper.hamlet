@@ -1,4 +1,3 @@
-$newline never
 \<!doctype html>
 \<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 \<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
@@ -7,12 +6,13 @@ $newline never
 <html class="no-js" lang="en"> <!--<![endif]-->
   <head>
     <meta charset="UTF-8">
-
-    <title>#{pageTitle pc}
-    <meta name="description" content="">
-    <meta name="author" content="">
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="author" content="Peter Harpending">
+    <meta name="description" content="A fun, easy-to-read math textbook">
+
+    <title>Learn You!
+    <title>#{pageTitle pc}
 
     ^{pageHead pc}
 
@@ -20,23 +20,59 @@ $newline never
     \<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     \<![endif]-->
 
-    <script>
-      document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
+    <!-- <link rel="stylesheet" type="text/css" href=@{StaticR bootstrap_css_bootstrap_min_css}> -->
+    <!-- <link rel="stylesheet" type="text/css" href=@{StaticR highlight_styles_default_css}> -->
+    <link rel="stylesheet" type="text/css" href="//static.learnyou.org/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//static.learnyou.org/highlight/styles/default.css">
+    <link rel="icon" href=@{FaviconR}>
+
   <body>
+    <div .navbar .navbar-inverse .navbar-static-top role=navigation>
+      <div .container>
+        <div .navbar-header>
+          <button type=button .navbar-toggle .collapsed
+                  data-toggle="collapse"
+                  data-target=".navbar-collapse">
+            <span .sr-only>Toggle navigation
+            <span .icon-bar>
+            <span .icon-bar>
+            <span .icon-bar>
+          <a .navbar-brand href=@{RootR}>Learn You!
+        <div .collapse .navbar-collapse>
+          <ul .nav .navbar-nav .navbar-right>
+            <li><a href="http://nightly.learnyou.org/lysa/">LYSA PDFs</a>
+            <li><a href="https://webchat.freenode.net/?channels=%23lysa">Webchat</a>
+            <li .noscript><a href=@{JSPolicyR}>JavaScript Policy</a>
+            <li .noscript><a href=@{LinksR}>Other links</a>
+            <script>document.write(`^{dropdownHtml}`);
+
     <div class="container">
-      <header>
       <div id="main" role="main">
         ^{pageBody pc}
-      <footer>
-        #{appCopyright $ appSettings master}
+    <footer .footer>
+      <div .container>
+        <div .table-responsive>
+          <table .table .table-bordered .table-hover>
+            <tr>
+              <td .bottom-cell .text-center .text-muted .small>
+                The <a href="https://github.com/learnyou/learnyou">source
+                code</a> for this site is licensed under
+                the <a href="https://www.gnu.org/licenses/agpl">GNU Affero
+                General Public License</a>.
+              <td .bottom-cell .text-center .text-muted .small>
+               &copy; 2015 Peter Harpending
+              <td .bottom-cell .text-center .text-muted .small>
+                The content of this site is licensed under the <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/"> Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
 
-    $maybe analytics <- appAnalytics $ appSettings master
-      <script>
-        if(!window.location.href.match(/localhost/)){
-          window._gaq = [['_setAccount','#{analytics}'],['_trackPageview'],['_trackPageLoadTime']];
-          (function() {
-          \  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          \  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          \  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-          })();
-        }
+    <!-- <script type="text/javascript" src=@{StaticR jquery_js}> -->
+    <!-- <script type="text/javascript" src=@{StaticR bootstrap_js_bootstrap_min_js}> -->
+    <!-- <script type="text/javascript" src=@{StaticR highlight_highlight_pack_js}> -->
+    <script type="text/javascript" src="//static.learnyou.org/jquery.js">
+    <script type="text/javascript" src="//static.learnyou.org/bootstrap/js/bootstrap.min.js">
+    <script type="text/javascript" src="//static.learnyou.org/highlight/highlight.pack.js">
+    <script type="text/javascript" src="//static.learnyou.org/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    <script type="text/javascript">hljs.initHighlightingOnLoad();
+    <script type="text/javascript">$(".noscript").remove();
+        

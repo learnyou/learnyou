@@ -1,0 +1,14 @@
+html { position: relative 
+     ; height: 100% 
+     }
+
+body { margin-bottom: 50px }
+
+.footer { width: 100%
+        ; padding-top: 10px
+        ; padding-bottom: 10px
+        }
+  
+.bottom-cell { width: 33% }
+
+.no-display { display: none }

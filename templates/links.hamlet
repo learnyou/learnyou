@@ -1,0 +1,11 @@
+<li><a href=@{AboutR}>About Learn You!</a>
+<li><a href=@{JSPolicyR}>Javascript Policy</a>
+<li><a href="https://github.com/learnyou">Learn You! on GitHub</a>
+<li><a href="https://webchat.freenode.net/?channels=%23lysa">LYSA IRC Channel (<code>#lysa</code>)</a>
+<li><a href="https://github.com/learnyou/lysa/issues">LYSA Issue Tracker</a>
+<li><a href="http://nightly.learnyou.org/lysa">LYSA Nightly PDFs</a>
+<li><a href="https://github.com/learnyou/lysa/blob/master/en/OUTLINE.md">LYSA Outline</a>
+<li><a href="https://github.com/learnyou/lysa/blob/master/en/README.md">LYSA README</a>
+<li><a href="https://github.com/learnyou/lysa">LYSA Source code</a>
+<li><a href="https://github.com/gazay/lysa">Russian Translation of LYSA</a>
+<li><a href="https://lysa.reddit.com/">/r/lysa on Reddit</a>
