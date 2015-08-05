@@ -22,8 +22,8 @@ database:
   password: "_env:PGPASS:learnyou"
   host:     "_env:PGHOST:localhost"
   port:     "_env:PGPORT:5432"
-  database: "_env:PGDATABASE:learnyou"
+  database: "_env:PGDATABASE:learnyou-db"
   poolsize: "_env:PGPOOLSIZE:10"
 
-copyright: Insert copyright statement here
+copyright: Copyright (c) 2015, Learn You!
 #analytics: UA-YOURCODE
