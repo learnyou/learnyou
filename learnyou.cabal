@@ -1,26 +1,24 @@
-name:              learnyou
-version:           0.0.0
-cabal-version:     >= 1.8
-build-type:        Simple
-author:            Peter Harpending
-maintainer:        peter@harpending.org
-license:           AGPL-3
-license-file:      LICENSE
-synopsis:          The source for <https://learnyou.org>
+name: learnyou
+version: 0.0.0
+cabal-version: >= 1.8
+build-type: Simple
+author: Peter Harpending
+maintainer: peter@harpending.org
+license: AGPL-3
+license-file: LICENSE
+synopsis: The source for <https://learnyou.org>
 description:
   <https://learnyou.org> is the site for /Learn You Some Algebras for Glorious
   Good!/ (LYSA). LYSA is a fun, easy-to-read math textbook inspired by
-  <http://learnyouahaskell.com/ Learn You a Haskell for Great
-  Good!>.
+  <http://learnyouahaskell.com/ Learn You a Haskell for Great Good!>.
 
+flag dev
+  description: Turn on development settings, like auto-reload templates.
+  default: False
 
-Flag dev
-    Description:   Turn on development settings, like auto-reload templates.
-    Default:       False
-
-Flag library-only
-    Description:   Build for use with "yesod devel"
-    Default:       False
+flag library-only
+  description: Build for use with "yesod devel"
+  default: False
 
 library
     hs-source-dirs: ., app
@@ -34,30 +32,28 @@ library
       Model
       Settings
       Settings.StaticFiles
-
     if flag(dev) || flag(library-only)
-        cpp-options:   -DDEVELOPMENT
-        ghc-options:   -Wall -fwarn-tabs -O0
+      cpp-options: -DDEVELOPMENT
+      ghc-options: -Wall -fwarn-tabs -O0
     else
-        ghc-options:   -Wall -fwarn-tabs -O2
-
-    extensions: TemplateHaskell
-                QuasiQuotes
-                OverloadedStrings
-                NoImplicitPrelude
-                CPP
-                MultiParamTypeClasses
-                TypeFamilies
-                GADTs
-                GeneralizedNewtypeDeriving
-                FlexibleContexts
-                EmptyDataDecls
-                NoMonomorphismRestriction
-                DeriveDataTypeable
-                ViewPatterns
-                TupleSections
-                RecordWildCards
-
+      ghc-options: -Wall -fwarn-tabs -O2
+    extensions:
+      CPP
+      DeriveDataTypeable
+      EmptyDataDecls
+      FlexibleContexts
+      GADTs
+      GeneralizedNewtypeDeriving
+      MultiParamTypeClasses
+      NoImplicitPrelude
+      NoMonomorphismRestriction
+      OverloadedStrings
+      QuasiQuotes
+      RecordWildCards
+      TemplateHaskell
+      TupleSections
+      TypeFamilies
+      ViewPatterns
     build-depends:
         aeson
       , base
@@ -66,11 +62,11 @@ library
       , classy-prelude-conduit
       , classy-prelude-yesod
       , conduit
-      , containers 
-      , data-default 
+      , containers
+      , data-default
       , directory
       , fast-logger
-      , file-embed 
+      , file-embed
       , hjsmin
       , http-conduit
       , monad-control
@@ -78,13 +74,13 @@ library
       , persistent
       , persistent-postgresql
       , persistent-template
-      , safe 
+      , safe
       , shakespeare
-      , template-haskell 
+      , template-haskell
       , text
-      , time 
-      , unordered-containers 
-      , vector 
+      , time
+      , unordered-containers
+      , vector
       , wai-extra
       , wai-logger
       , warp
@@ -96,52 +92,51 @@ library
       , yesod-markdown
       , yesod-static
 
-executable         learnyou
+executable learnyou
     if flag(library-only)
-        Buildable: False
-
-    main-is:           main.hs
-    hs-source-dirs:    app
-    build-depends:     base, learnyou
-
-    ghc-options:       -threaded -O2 -rtsopts -with-rtsopts=-N
+      buildable: False
+    main-is: main.hs
+    hs-source-dirs: app
+    build-depends: base, learnyou
+    ghc-options: -threaded -O2 -rtsopts -with-rtsopts=-N
 
 test-suite test
-    type:              exitcode-stdio-1.0
-    main-is:           Spec.hs
-    hs-source-dirs:    test
-    ghc-options:       -Wall
+    type: exitcode-stdio-1.0
+    main-is: Spec.hs
+    hs-source-dirs: test
+    ghc-options: -Wall
+    extensions:
+      CPP
+      DeriveDataTypeable
+      EmptyDataDecls
+      FlexibleContexts
+      GADTs
+      GeneralizedNewtypeDeriving
+      MultiParamTypeClasses
+      NoImplicitPrelude
+      NoMonomorphismRestriction
+      OverloadedStrings
+      QuasiQuotes
+      TemplateHaskell
+      TupleSections
+      TypeFamilies
+      ViewPatterns
 
-    extensions: TemplateHaskell
-                QuasiQuotes
-                OverloadedStrings
-                NoImplicitPrelude
-                CPP
-                MultiParamTypeClasses
-                TypeFamilies
-                GADTs
-                GeneralizedNewtypeDeriving
-                FlexibleContexts
-                EmptyDataDecls
-                NoMonomorphismRestriction
-                DeriveDataTypeable
-                ViewPatterns
-                TupleSections
-
-    build-depends: base
-                 , learnyou
-                 , yesod-test >= 1.4.3 && < 1.5
-                 , yesod-core
-                 , yesod
-                 , persistent
-                 , persistent-postgresql
-                 , resourcet
-                 , monad-logger
-                 , shakespeare
-                 , transformers
-                 , hspec >= 2.0.0
-                 , classy-prelude
-                 , classy-prelude-yesod
+    build-depends:
+        base
+      , classy-prelude                         
+      , classy-prelude-yesod                   
+      , hspec >= 2.0.0                         
+      , learnyou                               
+      , monad-logger                           
+      , persistent                             
+      , persistent-postgresql                  
+      , resourcet                              
+      , shakespeare                            
+      , transformers                           
+      , yesod                                  
+      , yesod-core                             
+      , yesod-test >= 1.4.3 && < 1.5
 
 source-repository head
   type: git
