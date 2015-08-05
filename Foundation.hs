@@ -44,27 +44,24 @@ type Form x = Html -> MForm (HandlerT App IO) (FormResult x, Widget)
 -- Please see the documentation for the Yesod typeclass. There are a number
 -- of settings which can be configured by overriding methods here.
 instance Yesod App where
-    -- Controls the base of generated URLs. For more information on modifying,
-    -- see: https://github.com/yesodweb/yesod/wiki/Overriding-approot
-    approot = ApprootMaster $ appRoot . appSettings
-
-    -- Store session data on the client in encrypted cookies,
-    -- default session idle timeout is 120 minutes
-    makeSessionBackend _ = Just <$> defaultClientSessionBackend
-        120    -- timeout in minutes
-        "config/client_session_key.aes"
-
-    defaultLayout widget = do
-        master <- getYesod
-        mmsg <- getMessage
-
-        -- We break up the default layout into two components:
-        -- default-layout is the contents of the body tag, and
-        -- default-layout-wrapper is the entire page. Since the final
-        -- value passed to hamletToRepHtml cannot be a widget, this allows
-        -- you to use normal widget features in default-layout.
-        let links = $(hamletFile "templates/links.hamlet")
-            dropdownHtml = [hamlet|
+  -- Controls the base of generated URLs. For more information on modifying,
+  -- see: https://github.com/yesodweb/yesod/wiki/Overriding-approot
+  approot = ApprootMaster $ appRoot . appSettings
+  -- Store session data on the client in encrypted cookies,
+  -- default session idle timeout is 120 minutes
+  makeSessionBackend _ =
+    Just <$> defaultClientSessionBackend 120 "config/client_session_key.aes"
+  defaultLayout widget =
+    do master <- getYesod
+       mmsg <- getMessage
+       -- We break up the default layout into two components:
+       -- default-layout is the contents of the body tag, and
+       -- default-layout-wrapper is the entire page. Since the final
+       -- value passed to hamletToRepHtml cannot be a widget, this allows
+       -- you to use normal widget features in default-layout.
+       let links = $(hamletFile "templates/links.hamlet")
+           dropdownHtml =
+             [hamlet|
                 <li .dropdown>
                   <a href="#" .dropdown-toggle data-toggle=dropdown role=button
                       aria-expanded=false>
@@ -73,49 +70,42 @@ instance Yesod App where
                   <ul .dropdown-menu role=menu>
                     ^{links}
                 |]
-
-        pc <- widgetToPageContent $ do
-            addStylesheet $ StaticR css_bootstrap_css
+       pc <-
+         widgetToPageContent $
+         do addStylesheet $ StaticR css_bootstrap_css
             $(widgetFile "default-layout")
-        withUrlRenderer $(hamletFile "templates/default-layout-wrapper.hamlet")
-
-    -- The page to be redirected to when authentication is required.
-    authRoute _ = Just $ AuthR LoginR
-
-    -- Routes not requiring authentication.
-    isAuthorized (AuthR _) _ = return Authorized
-    isAuthorized FaviconR _ = return Authorized
-    isAuthorized RobotsR _ = return Authorized
-    -- Default to Authorized for now.
-    isAuthorized _ _ = return Authorized
-
-    -- This function creates static content files in the static folder
-    -- and names them based on a hash of their content. This allows
-    -- expiration dates to be set far in the future without worry of
-    -- users receiving stale content.
-    addStaticContent ext mime content = do
-        master <- getYesod
-        let staticDir = appStaticDir $ appSettings master
-        addStaticContentExternal
-            minifym
-            genFileName
-            staticDir
-            (StaticR . flip StaticRoute [])
-            ext
-            mime
-            content
-      where
-        -- Generate a unique filename based on the content itself
-        genFileName lbs = "autogen-" ++ base64md5 lbs
-
-    -- What messages should be logged. The following includes all messages when
-    -- in development, and warnings and errors in production.
-    shouldLog app _source level =
-        appShouldLogAll (appSettings app)
-            || level == LevelWarn
-            || level == LevelError
-
-    makeLogger = return . appLogger
+       withUrlRenderer $(hamletFile "templates/default-layout-wrapper.hamlet")
+  -- The page to be redirected to when authentication is required.
+  authRoute _ = Just $ AuthR LoginR
+  -- Routes not requiring authentication.
+  isAuthorized (AuthR _) _ = return Authorized
+  isAuthorized FaviconR _ = return Authorized
+  isAuthorized RobotsR _ = return Authorized
+  -- Default to Authorized for now.
+  isAuthorized _ _ = return Authorized
+  -- This function creates static content files in the static folder
+  -- and names them based on a hash of their content. This allows
+  -- expiration dates to be set far in the future without worry of
+  -- users receiving stale content.
+  addStaticContent ext mime content =
+    do master <- getYesod
+       let staticDir = appStaticDir $ appSettings master
+       addStaticContentExternal minifym
+                                genFileName
+                                staticDir
+                                (StaticR . flip StaticRoute [])
+                                ext
+                                mime
+                                content
+    where
+          -- Generate a unique filename based on the content itself
+          genFileName lbs = "autogen-" ++ base64md5 lbs
+  -- What messages should be logged. The following includes all messages when
+  -- in development, and warnings and errors in production.
+  shouldLog app _source level =
+    appShouldLogAll (appSettings app) ||
+    level == LevelWarn || level == LevelError
+  makeLogger = return . appLogger
 
 -- How to run database actions.
 instance YesodPersist App where
