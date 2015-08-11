@@ -64,6 +64,7 @@ library
     build-depends:
         aeson
       , base
+      , bcrypt
       , bytestring
       , classy-prelude
       , classy-prelude-conduit
@@ -72,15 +73,20 @@ library
       , containers
       , data-default
       , directory
+      , exceptional
       , fast-logger
       , file-embed
       , hjsmin
       , http-conduit
+      , lens
+      , markdown
       , monad-control
       , monad-logger
+      , mtl >= 2.2
       , persistent
       , persistent-postgresql
       , persistent-template
+      , random
       , safe
       , shakespeare
       , template-haskell
@@ -96,7 +102,6 @@ library
       , yesod-auth
       , yesod-core
       , yesod-form
-      , yesod-markdown
       , yesod-static
 
 executable learnyou
