@@ -44,6 +44,7 @@ library
       FlexibleContexts
       GADTs
       GeneralizedNewtypeDeriving
+      LambdaCase
       MultiParamTypeClasses
       NoImplicitPrelude
       NoMonomorphismRestriction
