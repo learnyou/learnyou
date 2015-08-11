@@ -10,8 +10,8 @@ getUserR userIdent =
     -- No such user, return 404
     Nothing -> notFound
     -- There is a user, format the page
-    Just user -> defaultLayout $ do
-      [whamlet|
-        #{show user}
-      |]
-
+    Just user ->
+      defaultLayout $ do
+        [whamlet|
+          #{show user}
+        |]

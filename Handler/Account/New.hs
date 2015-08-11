@@ -3,40 +3,6 @@ module Handler.Account.New where
 import Control.Monad.Except
 import Import
 import Model.User
-import Yesod.Form.Bootstrap3
-
-newAccountForm :: Html -> MForm Handler (FormResult (ExceptT [String] IO User), Widget)
-newAccountForm extra = do
-  (usernameRes, usernameView) <- mreq textField (bfs' "Username") Nothing
-  (passwordRes, passwordView) <- mreq passwordField (bfs' "Password") Nothing
-  (passwordConfirmRes, passwordConfirmView) <- mreq passwordField (bfs' "Password (confirm)")
-                                                 Nothing
-  (emailRes, emailView) <- mopt emailField (bfs' "Email address (optional)") Nothing
-  (submitRes, submitView) <- mbootstrapSubmit ("Create account!" :: BootstrapSubmit Text)
-  let userRes = mkUser <$> usernameRes <*> passwordRes <*> passwordConfirmRes <*> emailRes
-                <* submitRes
-  let widget =
-        [whamlet|
-          #{extra}
-          <div .form-group>
-            <label>Username
-            ^{fvInput usernameView}
-          <div .form-group>
-            <label>Password
-            ^{fvInput passwordView}
-          <div .form-group>
-            <label>Password (confirm)
-            ^{fvInput passwordConfirmView}
-          <div .form-group>
-            <label>Email (optional)
-            ^{fvInput emailView}
-          ^{fvInput submitView}
-        |]
-  return (userRes, widget)
-
-  where
-    bfs' :: Text -> FieldSettings site
-    bfs' = bfs
 
 getAccountNewR :: Handler Html
 getAccountNewR = do
@@ -64,7 +30,7 @@ postAccountNewR = do
 
         |]
     FormSuccess user' -> do
-      user'' <- liftIO (runExceptT user')
+      user'' <- runExceptT user'
       case user'' of
         Left errs ->
           defaultLayout $
