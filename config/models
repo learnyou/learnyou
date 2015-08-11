@@ -1,6 +1,7 @@
 User
     ident Text
     password ByteString
+    salt ByteString
     email Text Maybe
     emailVerified Bool
     UniqueUser ident
