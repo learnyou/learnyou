@@ -25,11 +25,17 @@ library
     exposed-modules:
       Application
       Foundation
+      Handler.Account
+      Handler.Account.New
       Handler.Common
+      Handler.Login
+      Handler.Logout
       Handler.Pages
+      Handler.User
       Import
       Import.NoFoundation
       Model
+      Model.User
       Settings
       Settings.StaticFiles
     if flag(dev) || flag(library-only)
