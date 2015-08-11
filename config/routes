@@ -1,10 +1,12 @@
-/static StaticR Static appStatic
-/auth   AuthR   Auth   getAuth
-
-/favicon.ico FaviconR GET
-/robots.txt RobotsR GET
-
 / RootR GET
+/about AboutR GET
+/account AccountR GET
+/account/new AccountNewR GET POST
+/favicon.ico FaviconR GET
 /js-policy JSPolicyR GET
 /links LinksR GET
-/about AboutR GET
+/login LoginR GET POST
+/logout LogoutR GET POST
+/robots.txt RobotsR GET
+/static StaticR Static appStatic
+/user/#Text UserR GET
