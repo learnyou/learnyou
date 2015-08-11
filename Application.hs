@@ -28,8 +28,13 @@ import System.Log.FastLogger
 
 -- Import all relevant handler modules here.
 -- Don't forget to add new modules to your cabal file!
+import Handler.Account
+import Handler.Account.New
 import Handler.Common
+import Handler.Login
+import Handler.Logout
 import Handler.Pages
+import Handler.User
 
 -- This line actually creates our YesodDispatch instance. It is the second half
 -- of the call to mkYesodData which occurs in Foundation.hs. Please see the
