@@ -6,5 +6,4 @@ packages:
 - '.'
 extra-deps:
 - "yesod-bin-1.4.13.1"
-- "yesod-markdown-0.9.4"
-resolver: lts-2.17
+resolver: nightly-2015-08-08
