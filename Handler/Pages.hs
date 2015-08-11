@@ -1,23 +1,24 @@
 module Handler.Pages where
 
+import Data.FileEmbed
+import qualified Data.Text.Lazy as T
+import qualified Data.Text.Encoding as T
 import Import
 import Text.Hamlet (hamletFile)
-import Yesod.Markdown
+import Text.Markdown
 
-readMarkdownFile :: String -> Handler Html
-readMarkdownFile fp =
-  defaultLayout $
-  do x <- lift $ fmap markdownToHtmlTrusted (markdownFromFile fp)
-     toWidget x
+markdownString :: ByteString -> Handler Html
+markdownString =
+  defaultLayout . toWidget . markdown def . T.fromStrict . T.decodeUtf8
 
 getRootR :: Handler Html
-getRootR = readMarkdownFile "pages/root.md"
+getRootR = markdownString ($(embedFile "pages/root.md"))
 
 getAboutR :: Handler Html
-getAboutR = readMarkdownFile "pages/about.md"
+getAboutR = markdownString ($(embedFile "pages/about.md"))
 
 getJSPolicyR :: Handler Html
-getJSPolicyR = readMarkdownFile "pages/js-policy.md"
+getJSPolicyR = markdownString ($(embedFile "pages/js-policy.md"))
 
 getLinksR :: Handler Html
 getLinksR =
